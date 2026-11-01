@@ -1,0 +1,9 @@
+{
+  "model": "deepseek-flash",
+  "currency": "USD",
+  "unit": "per_1m_tokens",
+  "pricing_tier": "peak",
+  "input_price_per_1m": 0.30,
+  "cached_input_price_per_1m": 0.006,
+  "output_price_per_1m": 1.20
+}

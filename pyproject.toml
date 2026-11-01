@@ -1,0 +1,29 @@
+[project]
+name = "multi_agent_sales_intelligence"
+version = "0.1.0"
+description = "A multi-agent B2B sales intelligence prototype with evaluation, observability, human approval, and Mock CRM integration."
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=1.15.23,<2.0.0"
+]
+
+[project.scripts]
+multi_agent_sales_intelligence = "multi_agent_sales_intelligence.main:run"
+run_crew = "multi_agent_sales_intelligence.main:run"
+train = "multi_agent_sales_intelligence.main:train"
+replay = "multi_agent_sales_intelligence.main:replay"
+test = "multi_agent_sales_intelligence.main:test"
+run_with_trigger = "multi_agent_sales_intelligence.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
+project_id = "948c6182-9a4f-494b-988f-371d15fc42c4"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

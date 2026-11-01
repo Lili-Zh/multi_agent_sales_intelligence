@@ -1,0 +1,49 @@
+
+evaluation_name: Sales Intelligence Quality Evaluation
+
+score_scale:
+  1: Poor - Serious quality or reliability problems.
+  2: Weak - Significant issues requiring major revision.
+  3: Acceptable - Usable but with meaningful limitations.
+  4: Good - Well-supported with minor weaknesses.
+  5: Excellent - Strongly supported and consistently high quality.
+
+dimensions:
+  evidence_grounding:
+    description: >
+      Evaluate whether important factual claims in the research
+      report are connected to relevant supporting evidence.
+      Do not assume that a URL proves a claim is true.
+
+  evidence_classification:
+    description: >
+      Evaluate whether VERIFIED, REPORTED, and HYPOTHESIS labels
+      are used consistently with the evidence described.
+      Flag unsupported confidence or classification upgrades.
+
+  solution_grounding:
+    description: >
+      Evaluate whether the sales strategy uses only capabilities
+      stated in the provided solution description.
+      Flag invented or unsupported product capabilities.
+
+  decision_quality:
+    description: >
+      Evaluate whether the overall account-solution fit assessment
+      follows logically from the available evidence, including
+      uncertainty and potential disqualification.
+
+  actionability:
+    description: >
+      Evaluate whether recommended stakeholders, discovery
+      questions, and next steps are specific, relevant, and
+      practical.
+
+evaluation_rules:
+  - Score each dimension from 1 to 5.
+  - Provide a concise rationale for every score.
+  - Identify concrete supporting examples or issues.
+  - Do not invent missing evidence.
+  - Do not treat source URLs as independently verified.
+  - Explicitly acknowledge insufficient information.
+  - Preserve the distinction between facts and hypotheses.

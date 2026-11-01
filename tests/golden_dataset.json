@@ -1,0 +1,21 @@
+
+{
+  "dataset_name": "Sales Intelligence Golden Dataset",
+  "version": "1.0",
+  "test_cases": [
+    {
+      "case_id": "TC001",
+      "company_name": "Anthropic",
+      "industry": "Artificial Intelligence",
+      "scenario": "Weak-fit account evaluation",
+      "expected_behaviors": [
+        "Distinguish verified facts from hypotheses",
+        "Avoid inventing enterprise needs",
+        "Do not manufacture a strong sales opportunity",
+        "Provide evidence-based qualification reasoning",
+        "Recommend discovery rather than unsupported outreach claims"
+      ],
+      "expected_fit": "WEAK"
+    }
+  ]
+}

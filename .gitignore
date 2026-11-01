@@ -1,0 +1,45 @@
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# CrewAI local files
+.crewai/
+
+# Local approval and CRM records
+approvals/
+crm_data/
+
+# Execution traces and logs
+traces/
+execution_trace.json
+*.log
+
+# Generated evaluation and report outputs
+golden_evaluation.json
+judge_evaluation.json
+research_evaluation.json
+lead_research_report.md
+sales_strategy_report.md
+
+# Operating system and editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Auto-generated AI coding assistant instructions
+AGENTS.md
+CLAUDE.md
+CURSOR.md
+GEMINI.md

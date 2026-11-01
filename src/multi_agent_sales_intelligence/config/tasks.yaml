@@ -1,0 +1,310 @@
+lead_research_task:
+  description: >
+    Conduct comprehensive, evidence-grounded research on {company_name},
+    a company in the {industry} industry.
+
+    Investigate the company's business model, products and services,
+    market position, key decision makers, recent developments, and other
+    information relevant to understanding the account.
+
+    Follow this source verification workflow for important factual claims:
+
+    STEP 1 - SOURCE DISCOVERY:
+    Use the web search tool to discover relevant sources and candidate URLs.
+
+    STEP 2 - SOURCE SELECTION:
+    Prefer primary and authoritative sources such as the company's official
+    website, official announcements, regulatory filings, government sources,
+    and direct executive statements.
+
+    Use reputable secondary sources such as major news organizations when
+    primary sources are unavailable or when the claim itself concerns
+    externally reported information.
+
+    STEP 3 - SOURCE INSPECTION:
+    For important factual claims, use the website scraping tool to inspect
+    the underlying webpage whenever it is accessible.
+
+    Do not treat a search-result title or snippet alone as sufficient evidence
+    for classifying an important claim as VERIFIED.
+
+    STEP 4 - CLAIM-EVIDENCE MAPPING:
+    For every important factual claim, record:
+    - the claim
+    - the supporting evidence
+    - the source name
+    - the exact source URL whenever available
+    - whether the source is Primary or Secondary
+    - the evidence label
+    - the confidence level
+
+    STEP 5 - EVIDENCE CLASSIFICATION:
+    Classify important findings using the following labels:
+
+    VERIFIED:
+    Supported by reliable primary evidence or by multiple credible independent
+    sources whose underlying content has been inspected when possible.
+
+    REPORTED:
+    Reported by a credible source but not independently confirmed, including
+    estimates, leaks, analyst figures, unnamed-source reporting, or non-public
+    financial information.
+
+    HYPOTHESIS:
+    A reasonable business inference derived from available evidence but not
+    directly confirmed by a source.
+
+    STEP 6 - UNCERTAINTY HANDLING:
+    If evidence is missing, inaccessible, weak, conflicting, or cannot be
+    inspected beyond a search result, explicitly communicate that limitation.
+
+    Never upgrade a claim to VERIFIED simply because multiple search snippets
+    repeat the same information.
+
+    Pay particular attention to source verification for high-impact claims,
+    including:
+    - revenue and financial figures
+    - valuation and funding
+    - executive appointments
+    - major customers and partnerships
+    - major contracts
+    - regulatory or legal events
+    - IPO activity
+    - market-share claims
+    - major product or corporate announcements
+
+    Clearly distinguish customer facts from business hypotheses.
+    Never label an inference as VERIFIED.
+
+    
+    OUTPUT FORMAT REQUIREMENT:
+
+    Return ONLY one valid JSON object.
+    Do not wrap the JSON in Markdown code fences.
+    Do not include any explanatory text before or after the JSON.
+
+    The JSON object must contain these required top-level fields:
+
+    - company_overview
+    - business_model
+    - market_position
+    - key_decision_makers
+    - recent_developments
+    - potential_business_needs
+    - evidence
+
+    The evidence field must be a JSON array of evidence records.
+
+    Each evidence record must contain:
+
+    - claim
+    - evidence_label
+    - supporting_evidence
+    - source_name
+    - source_url
+    - source_type
+    - confidence
+
+    Allowed values:
+
+    evidence_label:
+    - VERIFIED
+    - REPORTED
+    - HYPOTHESIS
+
+    source_type:
+    - PRIMARY
+    - SECONDARY
+    - INFERENCE
+
+    confidence:
+    - HIGH
+    - MEDIUM
+    - LOW
+  
+   
+    OUTPUT SIZE CONSTRAINTS:
+
+    Keep the final JSON compact while preserving factual accuracy,
+    source traceability, and all required schema fields.
+
+    Strictly limit:
+    - key_decision_makers to at most 3 people
+    - recent_developments to at most 4 developments
+    - potential_business_needs to at most 3 needs
+    - evidence to at most 8 high-value evidence records
+
+    For each evidence record:
+    - Keep claim under 25 words.
+    - Keep supporting_evidence under 40 words.
+    - Keep source_name short.
+    - Preserve the exact source_url.
+    - Do not include long quotations or webpage passages.
+
+    For the top-level fields:
+    - company_overview: at most 80 words
+    - business_model: at most 80 words
+    - market_position: at most 60 words
+    - Each list item: at most 30 words
+
+    Prioritize evidence relevant to business needs and sales decisions.
+    Do not add extra JSON fields or repeat the same evidence.
+    Complete and close the JSON object before ending the response.
+  
+     
+  expected_output: >
+    A structured, evidence-grounded lead research result that conforms to
+    the LeadResearchReport schema.
+
+    The output must contain:
+
+    - company_overview:
+      A concise, evidence-grounded overview of {company_name}.
+
+    - business_model:
+      A summary of the company's business model, major products or services,
+      and relevant commercial context.
+
+    - market_position:
+      A summary of the company's market position and relevant industry context.
+
+    - key_decision_makers:
+      A list of relevant decision makers and their roles.
+
+    - recent_developments:
+      A list of important recent developments or milestones.
+
+    - potential_business_needs:
+      A list of potential business needs identified from the research.
+      These must remain hypotheses unless directly supported by evidence.
+
+    - evidence:
+      A list of evidence records supporting the important research findings.
+
+    Each evidence record must contain:
+
+    - claim
+    - evidence_label: VERIFIED, REPORTED, or HYPOTHESIS
+    - supporting_evidence
+    - source_name
+    - source_url
+    - source_type: PRIMARY, SECONDARY, or INFERENCE
+    - confidence: HIGH, MEDIUM, or LOW
+
+    Important VERIFIED or REPORTED factual claims should include a traceable
+    source URL whenever available.
+
+    Do not invent missing evidence or sources. If a claim is an inference,
+    classify it as HYPOTHESIS and use INFERENCE as the source type when
+    appropriate.
+
+
+    Return the result as a single valid JSON object only, with no Markdown
+    formatting, code fences, or additional explanatory text.
+
+
+sales_strategy_task:
+  description: >
+    Using the research findings about {company_name}, evaluate whether
+    {solution_name} is a credible solution for this account and develop
+    an evidence-based B2B sales strategy.
+
+    The solution being offered is:
+
+    {solution_name}
+
+    Solution description:
+    {solution_description}
+
+    First, analyze the findings produced by the Lead Research Agent.
+    Preserve the evidence classification of important upstream claims:
+
+    VERIFIED:
+    Supported by reliable primary evidence or multiple credible independent
+    sources.
+
+    REPORTED:
+    Reported by credible sources but not independently confirmed, including
+    estimates, analyst figures, leaks, and non-public financial information.
+
+    HYPOTHESIS:
+    A business inference derived from available evidence but not directly
+    confirmed by a source.
+
+    Do not upgrade a REPORTED claim to VERIFIED.
+    Do not upgrade a HYPOTHESIS to REPORTED or VERIFIED.
+    If the upstream evidence is weak, missing, conflicting, or unclear,
+    preserve that uncertainty in the sales analysis.
+
+    When an important account fact is used to justify a sales recommendation,
+    stakeholder recommendation, value proposition, or outreach message,
+    preserve the relevant source or evidence from the research whenever
+    available.
+
+    Identify customer needs or business problems that may be relevant to the
+    actual capabilities of {solution_name}.
+
+    Then evaluate the account-solution fit. For each potential opportunity,
+    explain:
+
+    - the customer need or business problem
+    - its evidence status
+    - the relevant capability of {solution_name}
+    - the strength of the solution fit
+    - the evidence supporting the reasoning
+    - any assumptions that still require validation
+
+    Do not invent product capabilities that are not included in the solution
+    description. Do not present inferred customer needs as confirmed facts.
+
+    If the available evidence does not support a meaningful fit between
+    {company_name} and {solution_name}, clearly state that the account is
+    currently a weak or unqualified opportunity instead of manufacturing
+    a sales case.
+
+    Based on the fit assessment, identify the most relevant stakeholders,
+    value propositions, discovery questions, engagement approach, and
+    recommended next steps.
+
+    If there is sufficient fit, create a personalized outreach message
+    grounded in supported account information and the actual capabilities
+    of {solution_name}. Avoid using weak or unsupported claims in external
+    outreach.
+
+  expected_output: >
+    A structured B2B sales strategy containing:
+
+    1. Account and solution summary
+
+    2. Evidence-grounded customer needs
+       For each important need, include its evidence label:
+       VERIFIED, REPORTED, or HYPOTHESIS.
+
+    3. Account-solution fit analysis
+       For each potential opportunity include:
+       - Customer need
+       - Evidence label
+       - Supporting evidence or source
+       - Relevant solution capability
+       - Fit strength
+       - Assumptions requiring validation
+
+    4. Overall fit assessment:
+       Strong, Moderate, Weak, or Insufficient Evidence
+
+    5. Recommended target stakeholders and rationale
+
+    6. Evidence-based value propositions
+
+    7. Key assumptions and hypotheses requiring validation
+
+    8. Discovery questions
+
+    9. Recommended engagement strategy
+
+    10. Personalized outreach message, if sufficient fit exists
+
+    11. Recommended next steps
+
+    Do not silently strengthen the confidence level of upstream research.
+
