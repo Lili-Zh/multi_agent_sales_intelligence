@@ -2,6 +2,14 @@
 
 **An AI-powered B2B sales intelligence prototype built with CrewAI, DeepSeek, and Python.**
 
+### Key Highlights
+
+- **Multi-Agent Orchestration:** Two specialized CrewAI agents collaborate sequentially to transform company research into B2B sales strategies.
+- **Evaluation & Quality Control:** Structured research validation, evaluation modules, and a golden dataset support output quality assessment.
+- **Execution Observability:** Execution tracing, token usage tracking, and estimated model cost calculation improve transparency.
+- **Human-in-the-Loop:** Approval workflows demonstrate how human oversight can govern sensitive sales actions.
+- **Mock CRM Integration:** A JSON-based CRM prototype demonstrates approval-gated lead status updates without requiring a production CRM.
+
 ## 1. Project Overview
 
 The Multi-Agent Sales Intelligence Platform is a prototype designed to help B2B sales teams automate company research, generate evidence-based sales strategies, and prepare actionable recommendations.
