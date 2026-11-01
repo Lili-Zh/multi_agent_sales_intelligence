@@ -405,3 +405,44 @@ The prototype includes evaluation and observability capabilities to explore addi
 - Reliability of selected business workflow operations
 
 These capabilities help identify potential failures and support more systematic product iteration.
+
+## 8. Demo Results
+
+### Automated Testing
+
+The prototype was validated using pytest, with 19 tests passing in the recorded local test run. These tests cover selected approval, Mock CRM, tracing, token usage, and cost calculation behaviors.
+
+### Human-in-the-Loop & Mock CRM Demo
+
+A local demonstration verified the following workflow:
+
+1. Create a pending human review and a Mock CRM lead.
+2. Approve the review through an explicit human decision.
+3. Update the CRM lead status from `NEW` to `QUALIFIED`.
+4. Retrieve the persisted CRM record and verify the updated status and next action.
+
+**Demo Result:** The approval-gated CRM update completed successfully.
+
+**Scope:** This demonstration uses local Python modules and JSON-based storage. It does not execute the live CrewAI agents or connect to a production CRM system.
+
+## 9. Limitations & Future Roadmap
+
+### Current Limitations
+
+- **Separate workflow modules:** The live CrewAI research and strategy workflow is not yet automatically connected to the human approval and Mock CRM demonstration.
+- **Mock CRM only:** CRM records are stored in local JSON files rather than a production CRM system.
+- **Limited approval enforcement:** Approval is required for the protected CRM update operation, but not every direct CRM write operation is approval-gated.
+- **Prototype-level persistence:** Local JSON storage does not provide production-grade transaction handling, concurrent access control, or database reliability.
+- **Limited evaluation coverage:** The current evaluation framework and golden dataset provide an initial foundation but require broader test cases and systematic benchmarking.
+
+### Future Roadmap
+
+1. **End-to-End Workflow Integration:** Connect actual Agent outputs to human review and approved CRM actions.
+2. **Production CRM Integration:** Integrate with a CRM platform through authenticated APIs and controlled permissions.
+3. **Stronger Human-in-the-Loop Controls:** Enforce approval policies consistently across sensitive actions and maintain auditable review histories.
+4. **Evaluation Expansion:** Introduce larger golden datasets, regression testing, and measurable quality benchmarks.
+5. **Production Readiness:** Improve persistence, error handling, retry strategies, security, and operational monitoring.
+
+### Product Vision
+
+The long-term goal is to evolve the prototype into a reliable, evidence-driven sales intelligence system that combines multi-agent collaboration, measurable output quality, operational transparency, and human oversight.
